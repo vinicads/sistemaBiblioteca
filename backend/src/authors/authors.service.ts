@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Author } from './author.entity';
 import { Repository } from 'typeorm';
+import { Book } from 'src/books/book.entity';
 
 @Injectable()
 export class AuthorsService {
   constructor(
     @InjectRepository(Author)
     private readonly authorRepository: Repository<Author>,
+    @InjectRepository(Book)
+        private readonly bookRepository: Repository<Book>
   ) {}
 
   async create(authorData: Partial<Author>, res) {
@@ -32,12 +35,7 @@ export class AuthorsService {
     try {
         const data = await this.authorRepository.find();
         if (data.length > 0){
-            const dataReturn = {
-                status: 200,
-                message: "Os autores foram recuperados com sucesso.",
-                data
-            }
-            return res.status(200).send(dataReturn)
+            return res.status(200).send(data)
         }else{
             const dataReturn = {
                 status: 403,
@@ -60,12 +58,7 @@ export class AuthorsService {
             where: { id },
           });
         if (data){
-            const dataReturn = {
-                status: 200,
-                message: "O autor foi recuperado com sucesso.",
-                data
-            }
-            return res.status(200).send(dataReturn)
+            return res.status(200).send(data)
         }else{
             const dataReturn = {
                 status: 403,
@@ -102,6 +95,7 @@ export class AuthorsService {
 
   async remove(id: number, res) {
     try {
+        await this.bookRepository.delete({ author: { id } }); 
         await this.authorRepository.delete(id);
         const dataReturn = {
             status: 200,

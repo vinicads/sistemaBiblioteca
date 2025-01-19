@@ -1,0 +1,15 @@
+<div class="popup-overlay" style="color: #000;">
+  <div class="popup-content">
+    <h3 class="text-center mb-4" >Atualizar Autor</h3>
+    
+    <div class="form-group">
+      <label for="authorName" class="form-label">Nome do Autor:</label>
+      <input type="text" id="authorName" class="form-control" [(ngModel)]="authorName" placeholder="Digite o nome do autor" />
+    </div>
+    
+    <div class="text-center mt-4">
+      <button (click)="updateAuthor()" class="btn btn-primary me-2">Atualizar</button>
+      <button (click)="closePopup()" class="btn btn-secondary">Fechar</button>
+    </div>
+  </div>
+</div>

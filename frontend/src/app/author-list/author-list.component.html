@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Lista de Autores</h2>
+  <div class="text-center mb-4">
+    <button class="btn btn-success" (click)="openCreatePopup()">Cadastrar Novo Autor</button>
+  </div>
+
+  @if(loading.value) {
+    <div class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+    </div>
+  }
+
+  @if(authors.value.length > 0) {
+    <div class="row">
+      @for(item of authors.value; track item.id) {
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body" style="color: #000;">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <button class="btn btn-primary" (click)="openEditPopup(item.id, item.name)">Editar</button>
+              <button class="btn btn-danger" (click)="openDeletePopup(item.id, item.name)">Excluir</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="alert alert-info">
+      Nenhum autor encontrado.
+    </div>
+  }
+
+  @if(showCreatePopup){
+    <app-create-author-popup (authorCreated)="createAuthor($event)" (close)="showCreatePopup = false"></app-create-author-popup>
+  }
+
+  @if(showEditPopup){
+    <app-update-author-popup (authorEdited)="editAuthor($event)" [authorId]="authorId" [authorName]="authorName" (close)="showEditPopup = false; authorId = ''; authorName = ''"></app-update-author-popup>
+  }
+  
+  @if(showDeletePopup){
+    <app-delete-author-popup (authorDeleted)="deleteAuthor($event)" [authorId]="authorId" [authorName]="authorName" (close)="showDeletePopup = false; authorId = '';"></app-delete-author-popup>
+  }
+</div>
