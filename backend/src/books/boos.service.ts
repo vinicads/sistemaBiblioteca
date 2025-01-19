@@ -32,12 +32,7 @@ export class BooksService {
     try {
         const data = await this.bookRepository.find({ relations: ['author'] });
         if (data.length > 0){
-            const dataReturn = {
-                status: 200,
-                message: "Os livros foram recuperados com sucesso.",
-                data
-            }
-            return res.status(200).send(dataReturn)
+            return res.status(200).send(data)
         }else{
             const dataReturn = {
                 status: 403,
@@ -61,12 +56,7 @@ export class BooksService {
             relations: ['author'],
           });
         if (data){
-            const dataReturn = {
-                status: 200,
-                message: "O livro foi encontrado com sucesso.",
-                data
-            }
-            return res.status(200).send(dataReturn)
+            return res.status(200).send(data)
         }else{
             const dataReturn = {
                 status: 403,
