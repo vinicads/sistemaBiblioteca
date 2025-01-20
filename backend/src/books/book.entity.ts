@@ -9,6 +9,9 @@ export class Book {
   @Column()
   title: string;
 
+  @Column({ type: 'date', nullable: true })
+  publicationDate: string;
+
   @ManyToOne(() => Author, (author) => author.books)
   author: Author;
 }

@@ -1,0 +1,14 @@
+<div class="popup-overlay" style="color: #000;">
+  <div class="popup-content">
+    <h3 class="text-center mb-4" >Deletar Livro</h3>
+    
+    <div class="form-group">
+        <p>Tem certeza que deseja deletar o livro {{bookName}}?</p>
+    </div>
+    
+    <div class="text-center mt-4">
+      <button (click)="deleteBook()" class="btn btn-primary me-2">Deletar</button>
+      <button (click)="closePopup()" class="btn btn-secondary">Fechar</button>
+    </div>
+  </div>
+</div>
