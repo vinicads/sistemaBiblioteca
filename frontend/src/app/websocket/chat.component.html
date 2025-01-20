@@ -1,0 +1,36 @@
+<div class="chat-app">
+    @if(!username) {
+      <div class="modal">
+        <div class="modal-content">
+          <h2>Bem-vindo ao Chat</h2>
+          <input [(ngModel)]="usernameInput" placeholder="Digite seu nome" />
+          <button (click)="confirmUsername()">Entrar</button>
+        </div>
+      </div>
+    }@else{
+      <div class="chat-container">
+        <div class="chat-header">
+          <h3>Chat Público</h3>
+        </div>
+  
+        <div class="chat-messages">
+            <div *ngFor="let message of messages; trackBy: trackById" [ngClass]="{
+              'self-message': message.senderId === userId,
+              'other-message': message.senderId !== userId,
+              'Sistema': message.sender === 'Sistema'
+            }">
+              <span *ngIf="message.sender && message.senderId !== userId && message.sender !== 'Sistema'" class="sender-name">
+                {{ message.sender }}
+              </span>
+              <div class="message-content">{{ message.content }}</div>
+            </div>
+          </div>
+  
+        <div class="chat-input">
+          <input type="text" [(ngModel)]="messageInput" (keyup.enter)="sendMessage()" placeholder="Digite sua mensagem..." />
+          <button (click)="sendMessage()">Enviar</button>
+        </div>
+      </div>
+    }
+  </div>
+  

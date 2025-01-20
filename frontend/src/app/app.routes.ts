@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthorListComponent } from './author-list/author-list.component';
 import { BookListComponent } from './book-list/book-list.component';
+import { ChatComponent } from './websocket/chat.component';
 
 export const routes: Routes = [
     {
@@ -10,5 +11,9 @@ export const routes: Routes = [
     {
         path: "books",
         component: BookListComponent,
-    }
+    },
+    {
+        path: "chat",
+        component: ChatComponent,
+    },
 ];
