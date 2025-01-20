@@ -13,7 +13,7 @@ Este projeto é um sistema simples de gerenciamento de uma biblioteca, desenvolv
 
 2. **Modelo de Dados (Relações de Tabela):**
    - Entidades principais: `Author` e `Book`.
-     - **Author:** `id`, `name`, `birthDate`.
+     - **Author:** `id`, `name`.
      - **Book:** `id`, `title`, `publicationDate`, relacionado a um `Author`.
 
 3. **WebSocket:**
