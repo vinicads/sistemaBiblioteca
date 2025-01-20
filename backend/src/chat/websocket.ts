@@ -2,7 +2,7 @@ import { WebSocketGateway, OnGatewayConnection, OnGatewayDisconnect, WebSocketSe
 import { Server, Socket } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
 
-@WebSocketGateway({ cors: { origin: 'http://localhost:8080', credentials: true } })
+@WebSocketGateway({ cors: { origin: 'http://localhost:4200', credentials: true } })
 export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
   connectedClients = new Map<string, { client: Socket, name: string }>();

@@ -7,6 +7,7 @@ import { AuthorsModule } from './authors/authors.module';
 import { Author } from './authors/author.entity';
 import { Book } from './books/book.entity';
 import { PlaywrightModule } from './playwright/playwright.module';
+import { AppGateway } from './chat/websocket';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PlaywrightModule } from './playwright/playwright.module';
     BooksModule,
     AuthorsModule,
     PlaywrightModule,
+    AppGateway
   ],
   controllers: [AppController],
   providers: [AppService],
