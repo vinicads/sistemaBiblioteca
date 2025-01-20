@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Lista de livros</h2>
+  <div class="text-center mb-4">
+    <button class="btn btn-success" (click)="openCreatePopup()">Cadastrar Novo Livro</button>
+  </div>
+
+  @if(loading.value) {
+    <div class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden"></span>
+      </div>
+    </div>
+  }
+
+  @if(books.value.length > 0) {
+    <div class="row">
+      @for(item of books.value; track item.id) {
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body" style="color: #000;">
+              <h3 class="card-title">{{ item.title }}</h3>
+              <h4 class="card-title">Publicado em: {{item.publicationDate ? item.publicationDate : "Não informado"}}</h4>
+              <h4 class="card-title">Autor: {{item.author.name}}</h4>
+              <button class="btn btn-primary" (click)="openEditPopup(item.id, item.title, item.publicationDate, item.author.id)">Editar</button>
+              <button class="btn btn-danger" (click)="openDeletePopup(item.id, item.title)">Excluir</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="alert alert-info">
+      Nenhum livro encontrado.
+    </div>
+  }
+
+  @if(showCreatePopup){
+    <app-create-book-popup (bookCreated)="createBook($event)" (close)="showCreatePopup = false"></app-create-book-popup>
+  }
+
+  @if(showEditPopup){
+    <app-update-book-popup (bookEdited)="editBook($event)" [bookId]="bookId" [bookName]="bookName" [bookPublicationDate]="bookPublicationDate" [bookAuthor]="bookAuthor" (close)="showEditPopup = false; bookId = ''; bookName = '';"></app-update-book-popup>
+  }
+  
+  @if(showDeletePopup){
+    <app-delete-book-popup (bookDeleted)="deleteBook($event)" [bookId]="bookId" [bookName]="bookName" (close)="showDeletePopup = false; bookId = '';"></app-delete-book-popup>
+  }
+</div>

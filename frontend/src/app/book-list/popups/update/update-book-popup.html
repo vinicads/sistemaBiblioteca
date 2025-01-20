@@ -1,0 +1,30 @@
+<div class="popup-overlay" style="color: #000;">
+  <div class="popup-content">
+    <h3 class="text-center mb-4" >Atualizar Livro</h3>
+    
+    <div class="form-group">
+      <label for="authorName" class="form-label">Nome do livro:</label>
+      <input type="text" id="authorName" class="form-control" [(ngModel)]="bookName" placeholder="Digite o nome do livro" />
+    </div>
+
+    <div class="form-group">
+      <label for="authorName" class="form-label">Data de publicação:</label>
+      <input type="date" id="bookPublicationDate" class="form-control" [(ngModel)]="bookPublicationDate" />
+    </div>
+
+    <div class="form-group">
+      <label for="authorName" class="form-label">Autor:</label>
+      <select [(ngModel)]="bookAuthor" class="form-control">
+        <option value="">Selecione...</option>
+        @for(item of authors.value; track item.id) {
+          <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    
+    <div class="text-center mt-4">
+      <button (click)="updateBook()" class="btn btn-primary me-2">Atualizar</button>
+      <button (click)="closePopup()" class="btn btn-secondary">Fechar</button>
+    </div>
+  </div>
+</div>
